@@ -22,14 +22,10 @@ spec:
           env:
             - name: PROFILE
               value: "k8s"
-            - name: REDIS_MASTER
-              value: mymaster
+            - name: SENTINEL_MASTER
+              value: sentinelMaster
             - name: SENTINEL_HOST1
               value: redis-sentinel:26379
-
-      imagePullSecrets:
-        - name: gitlab-registry
-
 ---
 apiVersion: v1
 kind: Service
