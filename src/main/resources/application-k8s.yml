@@ -1,0 +1,8 @@
+spring:
+  cache:
+    type: redis
+  redis:
+    port:  ${REDIS_SENTINEL:6379}
+    sentinel:
+      master: ${REDIS_MASTER:mymaster}
+      nodes: ${SENTINEL_HOST1:localhost:26379}

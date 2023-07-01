@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-redis-sentinel
+spec:
+  selector:
+    matchLabels:
+      app: back-redis-sentinel
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: back-redis-sentinel
+    spec:
+      containers:
+        - name: back-redis-sentinel
+          image: chuchip/redis-sentinel:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            - containerPort: 9010
+          env:
+            - name: PROFILE
+              value: "k8s"
+            - name: REDIS_MASTER
+              value: mymaster
+            - name: SENTINEL_HOST1
+              value: redis-sentinel:26379
+
+      imagePullSecrets:
+        - name: gitlab-registry
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-redis-sentinel
+spec:
+  selector:
+    app: back-redis-sentinel
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort
