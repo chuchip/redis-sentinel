@@ -40,23 +40,25 @@ For better security, log in with a limited-privilege personal access token. Lear
 
 ## Testing
 
+You can use swagger in http://localhost:8080/swagger-ui.html or you can use curl as I show below:
+
 #### Getting value of key: 1 when it doesn't exist.
 ```
-$ curl http://localhost:8080/1 ; echo ""
+$ curl http://localhost:8080/redis/1 ; echo ""
 
 Not found key: 1
 ```
 
 #### Putting the value of key: 1 to "Value1"
 ```
-$ curl -X PUT http://localhost:8080/1/value1; echo ""
+$ curl -X PUT http://localhost:8080/redis/1/value1; echo ""
 
 value1
 ```
 
 #### Getting value of key: 1 when it  exists.
 ```
-$ curl http://localhost:8080/1 ; echo "" 
+$ curl http://localhost:8080/redis/1 ; echo "" 
 
 value1
 ```
